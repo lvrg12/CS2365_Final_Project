@@ -9,22 +9,22 @@ public class SlotMachineMain
 {
 
 	public static void main(String[] args)
-	{	
+	{
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter username: ");
 		String username = kb.next();
-		
+
 		System.out.println("Welcome " + username + "!\n");
 		System.out.println("Select a Slot Machine to play:");
 		System.out.println("a) Form Figure");
 		System.out.println("b) Classical");
 		String type = kb.next();
-		
+
 		if(type.equals("a"))
 		{
 			FormFigure figure = new FormFigure();
 			String tmp = "y";
-			
+
 			while(tmp.equals("y"))
 			{
 				figure.displayInstruction();
@@ -39,9 +39,9 @@ public class SlotMachineMain
 				System.out.print("Do you want to continue? (y/n): ");
 				tmp=kb.next();
 			}
-			
+
 			System.out.println("You exited the program");
-			
+
 		}
 		else if(type.equals("b"))
 		{
@@ -49,8 +49,9 @@ public class SlotMachineMain
 			//Classical classical = new Classical();
 			//classical.play();
 		}
-		
+
 		kb.close();
+		//This comment was done in Atom
 
 	}
 

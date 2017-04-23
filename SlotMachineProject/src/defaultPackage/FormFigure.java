@@ -6,10 +6,10 @@ public class FormFigure extends SlotMachine
 	private static String[] top = new String[3];
 	private static String[] mid = new String[3];
 	private static String[] bot = new String[3];
-	
+
 	//Pictures
 	{
-	
+
 	//<--------------------------------MUSHROOM PICTURE--------------------------->
 		top[0] = "                     . $MMMMMMMMMMMD..                      \n"
 				+ "                   DMMMMM...     ,MMMMMM.                   \n"
@@ -23,7 +23,7 @@ public class FormFigure extends SlotMachine
 				+ "       M MMMMMMMM                         MMMMMMMM DZ       \n"
 				+ "      M  MMMMMMMM                         MMMMMMMM .M.      \n"
 				+ "     M   MMMMMMMM.                       .MMMMMMMM  .M      \n";
-		
+
 		mid[0] = "     M   MMMMMMMMM.                     .MMMMMMMMM   .M     \n"
 				+ "   .M.   MMMMMMMMMM                     MMMMMMMMMM    M.    \n"
 				+ "   .M    MMMMMMMMMMM                  .MMMMMMMMMMM.   ,7    \n"
@@ -36,7 +36,7 @@ public class FormFigure extends SlotMachine
 				+ "    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM     \n"
 				+ "   .8MMMMMMMMMMMMMMMM$.           .  MMMMMMMMMMMMMMMMM,     \n"
 				+ "     MMMMMMMMMMMM+     MM.       .MM    .MMMMMMMMMMMMM      \n";
-		
+
 		bot[0] = "      7MMMMMMMM        M.:        M ,      ,MMMMMMMMI       \n"
 				+ "        MMMMMM.        M D       .M 8        MMMMMM.        \n"
 				+ "         .MMMM         MM8       .MM$        MMMM.          \n"
@@ -47,7 +47,7 @@ public class FormFigure extends SlotMachine
 				+ "                OM:.                    .NM,                \n"
 				+ "                  .MMMD ..         ..$MMM..                 \n"
 				+ "                        .$MMMMMMMMM,.\n";
-		
+
 		//<----------------------------FLOWER PICTURE---------------------------->
 		top[1] = "                       7777777777?                          \n"
 				+ "                 :777777777777777777777                     \n"
@@ -62,7 +62,7 @@ public class FormFigure extends SlotMachine
 				+ "      7777$$++??I~,    DD      DD     :=I??++$$7777         \n"
 				+ "      7777$$++??I~,    DD      DD     :=I??++$$7777         \n"
 				+ "      7777$$+++?I=:.   DD      DD    ,~???++$$7777          \n";
-		
+
 		mid[1] = "       777$$$++??I=:.               ,~?I?+++$$7777          \n"
 				+ "       7777$$$++????~,.           ,:=I??+++$$7777           \n"
 				+ "        7777$$$+++????=~:,....,,:~+I???++$$$7777            \n"
@@ -75,7 +75,7 @@ public class FormFigure extends SlotMachine
 				+ "                          ZZZZZ                             \n"
 				+ "                          $ZZZZ                             \n"
 				+ "                          $$$$Z                             \n";
-		
+
 		bot[1] = "      I$ZZZZZZZ$          $$$$$         ZZZZZZZZZ$7II       \n"
 				+ "     II$$ZZZZZZZZZZ       $$$$$       ZZZZZZZZZZ$$7II~      \n"
 				+ "     II7$$$ZZZZZZZ$$      $$$$$     $$$$ZZZZZZ$$$77II?      \n"
@@ -87,7 +87,7 @@ public class FormFigure extends SlotMachine
 				+ "          IIIIIIII777IIIIIIIIIIIII777777777IIIIII           \n"
 				+ "              IIIIIII     IIIII    IIIIIIIIII,              \n"
 				+ "                           ~I:\n";
-		
+
 		//<--------------------------------STAR PICTURE--------------------------->
 		top[2] = "                            .,                              \n"
 				+ "                           8MMM                             \n"
@@ -103,7 +103,7 @@ public class FormFigure extends SlotMachine
 				+ "                 ..NM                MMM                    \n"
 				+ "         .OMMMMMMMMM.                  MMMMMMMMM=  .        \n"
 				+ " OMMMMMMMMM+                                  .IMMMMMMMMMO. \n";
-		
+
 		mid[2] = "MM,                      .        .                     ,MM \n"
 				+ "7MM                     M M      . M                    MMI \n"
 				+ "  MM.                  MM M     M..M                  ~MM   \n"
@@ -118,7 +118,7 @@ public class FormFigure extends SlotMachine
 				+ "             M.                             MM              \n"
 				+ "            MM                               M              \n"
 				+ "           .MM                               MM             \n";
-		
+
 		bot[2] = "            MM                               MM             \n"
 				+ "           .M                                7M             \n"
 				+ "           MM             . 8M:               M.            \n"
@@ -128,9 +128,9 @@ public class FormFigure extends SlotMachine
 				+ "          MM  .MMMM .                 .+MMM.  .M            \n"
 				+ "          MMMMMM.                         .MMMMMM           \n"
 				+ "           +=                                .MM\n";
-		
+
 	}
-	
+
 	public FormFigure()
 	{
 		super(1,0);
@@ -144,12 +144,12 @@ public class FormFigure extends SlotMachine
 	{
 		return cost;
 	}
-	
+
 	public int getPrize()
 	{
 		return prize;
 	}
-	
+
 	public void setPrize()
 	{
 		if(matched())
@@ -194,7 +194,7 @@ public class FormFigure extends SlotMachine
 		System.out.println("Press y 3 times to form a figure.");
 		System.out.println("Press n to go back.\n");
 	}
-	
+
 	private boolean matched()
 	{
 		return key[0] == key[1] && key[0] == key[2];
