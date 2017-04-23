@@ -49,6 +49,8 @@ public class SlotMachineMain
 			//Classical classical = new Classical();
 			//classical.play();
 		}
+		
+		kb.close();
 
 	}
 
