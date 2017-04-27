@@ -57,15 +57,16 @@ public class LoginFrame extends JFrame
 
 	static void addButtonAction()
 	{
-		// add the listener to the jbutton to handle the "pressed" event
+		//adding listener to button
+		
 		button1.addActionListener(new ActionListener()
 	    {
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  username = field1.getText();
-	      }
-	    });
-	  }
+			public void actionPerformed(ActionEvent e)
+			{
+				username = field1.getText();
+			}
+		});
+	}
 	
 	public String getUsername()
 	{

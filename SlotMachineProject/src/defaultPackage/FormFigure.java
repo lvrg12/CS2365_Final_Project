@@ -191,7 +191,7 @@ public class FormFigure extends SlotMachine
 		}
 	}
 
-	public void displayInstruction()
+	public void displayInstructions()
 	{
 		System.out.println();
 		System.out.println("Make a mushroom, flower, or star by lining up evey image");

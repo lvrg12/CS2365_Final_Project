@@ -18,16 +18,36 @@ public class SlotMachineMain
 		
 		String username = login.getUsername();
 		
+		//waiting for appropriate username input
 		while(username.equals(""))
 		{
-			//wait for appropriate username
 			username = login.getUsername() + "";
 		}
+		
 		login.setVisible(false);
-		HomeFrame home = new HomeFrame(login.getUsername());
+		HomeFrame home = new HomeFrame(username);
 		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home.setSize(855,600);
 		home.setVisible(true);
+		
+		String wanted_game = home.getWantedGame();
+		
+		//waiting for user to choose a game
+		while(wanted_game.equals("None"))
+		{
+			wanted_game = home.getWantedGame() + "";
+			System.out.println(wanted_game);
+		}
+		
+		home.setVisible(false);
+		
+		if(wanted_game.equals("FormFigure"))
+		{
+			FormFigureFrame form_figure = new FormFigureFrame(10);
+			form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			form_figure.setSize(855,600);
+			form_figure.setVisible(true);
+		}
 		
 		/*
 		Scanner kb = new Scanner(System.in);
