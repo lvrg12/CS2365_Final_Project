@@ -1,3 +1,7 @@
+//Author: Lino Virgen
+//Class: CS 2365
+//Date: 05/10/17
+
 package defaultPackage;
 
 public class FormFigure extends SlotMachine

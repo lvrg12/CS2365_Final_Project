@@ -4,12 +4,32 @@
 
 package defaultPackage;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class SlotMachineMain
 {
-
 	public static void main(String[] args)
 	{
+		LoginFrame login = new LoginFrame();
+		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		login.setSize(855,600);
+		login.setVisible(true);
+		
+		String username = login.getUsername();
+		
+		while(username.equals(""))
+		{
+			//wait for appropriate username
+			username = login.getUsername() + "";
+		}
+		login.setVisible(false);
+		HomeFrame home = new HomeFrame(login.getUsername());
+		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		home.setSize(855,600);
+		home.setVisible(true);
+		
+		/*
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter username: ");
 		String username = kb.next();
@@ -52,7 +72,7 @@ public class SlotMachineMain
 
 		kb.close();
 		//This comment was done in Atom
-
+		*/
 	}
 
 }
