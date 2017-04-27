@@ -166,7 +166,7 @@ public class FormFigure extends SlotMachine
 		}
 	}
 
-	public void pullLever(int setting)
+	public int pullLever(int setting)
 	{
 		prize = 0;
 		int x = getRandom(3);
@@ -174,20 +174,24 @@ public class FormFigure extends SlotMachine
 		{
 			System.out.println(top[x]);
 			key[0] = x;
+			return x;
 		}
 		else if(setting==1)
 		{
 			System.out.println(mid[x]);
 			key[1] = x;
+			return x;
 		}
 		else if(setting==2)
 		{
 			System.out.println(bot[x]);
 			key[2] = x;
+			return x;
 		}
 		else
 		{
 			System.out.println("Invalid lever setting.");
+			return -1;
 		}
 	}
 

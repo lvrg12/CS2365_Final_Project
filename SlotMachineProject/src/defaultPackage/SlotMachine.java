@@ -5,10 +5,10 @@
 package defaultPackage;
 import java.util.Random;
 
-abstract public class SlotMachine
+public class SlotMachine
 {
-	public int cost;
-	public int prize;
+	private int cost;
+	private int prize;
 	private Random randomGenerator;
 	
 	public SlotMachine(int cost, int prize)
@@ -18,10 +18,49 @@ abstract public class SlotMachine
 		randomGenerator = new Random();
 	}
 	
-	public abstract int getCost();
-	public abstract int getPrize();
-	public abstract void pullLever(int setting);
-	public abstract void displayInstruction();
+	public int getCost()
+	{
+		return cost;
+	}
+	
+	public int getPrize()
+	{
+		return prize;
+	}
+	
+	public int pullLever(int setting)
+	{
+		prize = 0;
+		int x = getRandom(3);
+		if(setting==0)
+		{
+			System.out.println(top[x]);
+			key[0] = x;
+			return x;
+		}
+		else if(setting==1)
+		{
+			System.out.println(mid[x]);
+			key[1] = x;
+			return x;
+		}
+		else if(setting==2)
+		{
+			System.out.println(bot[x]);
+			key[2] = x;
+			return x;
+		}
+		else
+		{
+			System.out.println("Invalid lever setting.");
+			return -1;
+		}
+	}
+	
+	public String getInstruction()
+	{
+		
+	}
 	
 	public int getRandom(int range)
 	{

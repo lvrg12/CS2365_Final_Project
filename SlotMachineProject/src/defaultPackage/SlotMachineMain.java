@@ -36,7 +36,6 @@ public class SlotMachineMain
 		while(wanted_game.equals("None"))
 		{
 			wanted_game = home.getWantedGame() + "";
-			System.out.println(wanted_game);
 		}
 		
 		home.setVisible(false);
@@ -45,7 +44,7 @@ public class SlotMachineMain
 		{
 			FormFigureFrame form_figure = new FormFigureFrame(10);
 			form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			form_figure.setSize(855,600);
+			form_figure.setSize(1450,1450);
 			form_figure.setVisible(true);
 		}
 		
