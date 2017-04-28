@@ -143,6 +143,7 @@ public class SlotMachineMain
 				classical.setVisible(false);
 				classical.dispose();
 				home.resetWantedGame();
+				home.setAvailableTokens(player.getTokens());
 				home.setVisible(true);
 			}
 		}
