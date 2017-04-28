@@ -144,7 +144,6 @@ public class FormFigureFrame extends JFrame
 					if(prize>0)
 					{
 						label3.setVisible(true);
-						//available_tokens+=prize;
 					}
 					
 					button1.setText("Try Again");
@@ -197,5 +196,10 @@ public class FormFigureFrame extends JFrame
 	public void setAvailableTokens(int tokens)
 	{
 		available_tokens = tokens;
+	}
+	
+	public void resetPrize()
+	{
+		prize = 0;
 	}
 }

@@ -77,12 +77,12 @@ public class SlotMachineMain
 						new_game = form_figure.getNewGame();
 					}
 					player.addTokens(form_figure.getPrize());
+					form_figure.resetPrize();
 				}
 				
 				waiter+=""; //keep looping
 				changed_game = form_figure.getChangedGame();
 			}
-			System.out.println(player.getTokens());
 		}
 	}
 }
