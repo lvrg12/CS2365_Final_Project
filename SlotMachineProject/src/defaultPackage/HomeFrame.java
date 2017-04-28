@@ -24,13 +24,13 @@ public class HomeFrame extends JFrame
 	static private boolean figure_button_pressed;
 	static private boolean classical_button_pressed;
 	
-	public HomeFrame(String username)
+	public HomeFrame(String username, int tokens)
 	{   
 		//Initializing sections of frame
 		super("Home");
 		setLayout(new FlowLayout());
 		label1 = new JLabel("<html>Welcome <i>"+username+"</i>!<br></html>");
-		label2 = new JLabel("<html><br>You have 10 tokens<br><br></html>");
+		label2 = new JLabel("<html><br>You have "+tokens+" tokens<br><br></html>");
 		label3 = new JLabel("<html>Choose a machine to play:</html>");
 		button1 = new JButton("Form Figure");
 		label4 = new JLabel("<html>1 token per play</html>");

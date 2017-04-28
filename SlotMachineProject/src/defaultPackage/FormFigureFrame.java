@@ -14,7 +14,7 @@ public class FormFigureFrame extends JFrame
 	//frame sections
 	private JLabel label1; //Available tokens label
 	private JLabel label2; //Instructions label
-	private JLabel label3; //You won label
+	static private JLabel label3; //You won label
 	static private JLabel top; //top image label
 	static private JLabel mid; //middle image label
 	static private JLabel but; //buttom image label
@@ -26,24 +26,31 @@ public class FormFigureFrame extends JFrame
 	static private Icon buts[] = new Icon[3]; //buttom images icons
 	static private Icon icon1; //loading image icon
 	
-	//variables to retrieve
 	static private FormFigure machine;
-	static private int setting;
+	static private int clicks;
+	static private int prize;
+	
+	//variables to retrieve
+	static private boolean changed_game;
+	static private boolean new_game;
+	static private int available_tokens;
 	
 	public FormFigureFrame(int tokens)
 	{   
 		//Initializing sections of frame
 		super("Form Figure Machine");
 		machine = new FormFigure();
-	    setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		//setLayout(new FlowLayout());
+		clicks = 0;
+		prize = 0;
+		changed_game = false;
+		available_tokens = tokens+1;
+		
+	    //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		setLayout(new FlowLayout());
 		label1 = new JLabel("Available tokens: ");
-		String instruction = "<html>Make a mushroom, flower, or star by lining up evey image."
-				+ "<br>Press y 3 times to form a figure."
-				+ "<br>Press n to go back.</html>";
-		label2 = new JLabel(instruction);
+		label2 = new JLabel(machine.getInstruction());		
 		label3 = new JLabel("You won 10 tokens!!!");
-		field1 = new JTextField(tokens+"",10);
+		field1 = new JTextField(available_tokens-1+"",10);
 		button1 = new JButton("Pull Lever");
 		button2 = new JButton("Change Machine");
 		icon1 = new ImageIcon(getClass().getResource("media/wait5.png"));
@@ -68,13 +75,15 @@ public class FormFigureFrame extends JFrame
 		field1.setFont(new Font("Courier", Font.BOLD,40));
 		field1.setEditable(false);
 		
+		label2.setHorizontalTextPosition(SwingConstants.CENTER);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		label2.setFont(new Font("Courier", Font.ITALIC,40));
 		
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
 		label3.setFont(new Font("Courier", Font.BOLD,40));
+		label3.setVisible(false);
 		
-		button1.setHorizontalAlignment(SwingConstants.RIGHT);
+		button1.setHorizontalAlignment(SwingConstants.CENTER);
 		button1.setFont(new Font("Courier", Font.PLAIN,40));
 		
 		button2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,62 +119,83 @@ public class FormFigureFrame extends JFrame
 	    {
 			public void actionPerformed(ActionEvent e)
 			{
-				if(setting==0)
+				int key = machine.getRandom(3);
+				if(clicks==0)
 				{
-					top.setIcon(tops[machine.getRandom(3)]);
-					setting++;
+					new_game = true;
+					top.setIcon(tops[key]);
+					clicks++;
+					machine.setKey0(key);
 				}
-				else if(setting==1)
+				else if(clicks==1)
 				{
-					mid.setIcon(mids[machine.getRandom(3)]);
-					setting++;
+					mid.setIcon(mids[key]);
+					clicks++;
+					machine.setKey1(key);
 				}
-				else if(setting==2)
+				else if(clicks==2)
 				{
-					but.setIcon(buts[machine.getRandom(3)]);
-					setting++;
+					but.setIcon(buts[key]);
+					clicks++;
+					machine.setKey2(key);
+					
+					prize = machine.calculate();
+
+					if(prize>0)
+					{
+						label3.setVisible(true);
+						//available_tokens+=prize;
+					}
+					
 					button1.setText("Try Again");
+					new_game = false;
 				}
 				else
 				{
-					setting = 0;
+					//start new machine
+					clicks = 0;
 					top.setIcon(icon1);
 					mid.setIcon(icon1);
 					but.setIcon(icon1);
 					button1.setText("Pull Lever");
+					label3.setVisible(false);
+					prize = 0;
 				}
+				field1.setText(""+available_tokens);
 			}
 		});
 		
-		/*
 		button2.addActionListener(new ActionListener()
 	    {
 			public void actionPerformed(ActionEvent e)
 			{
-				figure_button_pressed = false;
-				classical_button_pressed = true;
-				System.out.println("Game wanted: classical");
+				changed_game = true;
 			}
 		});
-		*/
-		
 	}
-	/*
-	public String getWantedGame()
+
+	public int getPrize()
 	{
-		if(figure_button_pressed==true)
-		{
-			return "FormFigure";
-		}
-		else if(classical_button_pressed==true)
-		{
-			return "Classical";
-		}
-		else
-		{
-			return "none";
-		}
+		return prize;
 	}
-	*/
 	
+	public int getCost()
+	{
+		return machine.getCost();
+	}
+	
+	public boolean getChangedGame()
+	{
+		return changed_game;
+	}
+	
+	public boolean getNewGame()
+	{
+		return new_game;
+	}
+	
+	public void setAvailableTokens(int tokens)
+	{
+		available_tokens = tokens;
+	}
 }

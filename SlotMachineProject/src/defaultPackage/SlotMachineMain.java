@@ -11,6 +11,7 @@ public class SlotMachineMain
 {
 	public static void main(String[] args)
 	{
+		String waiter = "";
 		LoginFrame login = new LoginFrame();
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.setSize(855,600);
@@ -24,8 +25,10 @@ public class SlotMachineMain
 			username = login.getUsername() + "";
 		}
 		
+		Player player = new Player(username,20);
+		
 		login.setVisible(false);
-		HomeFrame home = new HomeFrame(username);
+		HomeFrame home = new HomeFrame(player.getUsername(),player.getTokens());
 		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home.setSize(855,600);
 		home.setVisible(true);
@@ -42,56 +45,44 @@ public class SlotMachineMain
 		
 		if(wanted_game.equals("FormFigure"))
 		{
-			FormFigureFrame form_figure = new FormFigureFrame(10);
+			FormFigureFrame form_figure = new FormFigureFrame(player.getTokens());
 			form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			form_figure.setSize(1450,1450);
+			form_figure.setSize(750,1450);
 			form_figure.setVisible(true);
-		}
-		
-		/*
-		Scanner kb = new Scanner(System.in);
-		System.out.print("Enter username: ");
-		String username = kb.next();
-
-		System.out.println("Welcome " + username + "!\n");
-		System.out.println("Select a Slot Machine to play:");
-		System.out.println("a) Form Figure");
-		System.out.println("b) Classical");
-		String type = kb.next();
-
-		if(type.equals("a"))
-		{
-			FormFigure figure = new FormFigure();
-			String tmp = "y";
-
-			while(tmp.equals("y"))
+			
+			boolean changed_game = form_figure.getChangedGame();
+			
+			//waiting to change game
+			while(!changed_game)
 			{
-				figure.displayInstruction();
-				tmp=kb.next();
-				figure.pullLever(0);
-				tmp=kb.next();
-				figure.pullLever(1);
-				tmp=kb.next();
-				figure.pullLever(2);
-				figure.setPrize();
-				System.out.println("You won "+figure.getPrize()+" tokens.");
-				System.out.print("Do you want to continue? (y/n): ");
-				tmp=kb.next();
+				boolean new_game = form_figure.getNewGame();
+				
+				//wait for new game to start or change game
+				while(!new_game && !changed_game)
+				{
+					waiter+=""; //keep looping
+					new_game = form_figure.getNewGame();
+					changed_game = form_figure.getChangedGame();
+				}
+				
+				if(new_game)
+				{
+					player.subtractTokens(form_figure.getCost());
+					form_figure.setAvailableTokens(player.getTokens());
+					
+					//waiting for game to finish
+					while(new_game)
+					{
+						waiter+=""; //keep looping
+						new_game = form_figure.getNewGame();
+					}
+					player.addTokens(form_figure.getPrize());
+				}
+				
+				waiter+=""; //keep looping
+				changed_game = form_figure.getChangedGame();
 			}
-
-			System.out.println("You exited the program");
-
+			System.out.println(player.getTokens());
 		}
-		else if(type.equals("b"))
-		{
-			System.out.println("You chose to play Classical Slot Machine");
-			//Classical classical = new Classical();
-			//classical.play();
-		}
-
-		kb.close();
-		//This comment was done in Atom
-		*/
 	}
-
 }
