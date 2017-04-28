@@ -30,7 +30,7 @@ public class HomeFrame extends JFrame
 		super("Home");
 		setLayout(new FlowLayout());
 		label1 = new JLabel("<html>Welcome <i>"+username+"</i>!<br></html>");
-		label2 = new JLabel("<html><br>You have <u>"+tokens+"</u> tokens<br><br></html>");
+		label2 = new JLabel("<html><br>You have <b>"+tokens+"</b> tokens<br><br></html>");
 		label3 = new JLabel("<html>Choose a machine to play:</html>");
 		button1 = new JButton("Form Figure");
 		label4 = new JLabel("<html>1 token per play</html>");
@@ -122,6 +122,6 @@ public class HomeFrame extends JFrame
 	
 	public void setAvailableTokens(int tokens)
 	{
-		label2.setText("<html><br>You have <u>"+tokens+"</u> tokens<br><br></html>");
+		label2.setText("<html><br>You have <b>"+tokens+"</b> tokens<br><br></html>");
 	}
 }

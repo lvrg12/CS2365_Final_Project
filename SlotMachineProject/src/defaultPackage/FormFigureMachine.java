@@ -16,7 +16,8 @@ public class FormFigureMachine extends SlotMachine
 	
 	public String getInstruction()
 	{
-		return "<html><br>Make a mushroom, flower,<br>or star by lining up evey<br>image.<br><br></html>";
+		return "<html><br>Make a mushroom, flower,<br>or star by lining up evey<br>"
+				+ "image.<br>You can win 10 tokens!<br><br></html>";
 	}
 
 	public void setKey0(int i)

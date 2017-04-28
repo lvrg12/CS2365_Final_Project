@@ -9,24 +9,29 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class FormFigureFrame extends JFrame
+public class ClassicalFrame extends JFrame
 {
 	//frame sections
 	private JLabel label1; //Available tokens label
 	private JLabel label2; //Instructions label
+	private JLabel line; //line label
 	static private JLabel label3; //You won label
-	static private JLabel top; //top image label
-	static private JLabel mid; //middle image label
-	static private JLabel but; //buttom image label
+	static private JLabel cell0; //cell0 image label
+	static private JLabel cell1; //cell1 image label
+	static private JLabel cell2; //cell2 image label
+	static private JLabel cell3; //cell3 image label
+	static private JLabel cell4; //cell4 image label
+	static private JLabel cell5; //cell5 image label
+	static private JLabel cell6; //cell6 image label
+	static private JLabel cell7; //cell7 image label
+	static private JLabel cell8; //cell8 image label
 	static private JTextField field1; //tokens field
 	static private JButton button1; //Pull lever/Try again button
 	static private JButton button2; //Change machine button
-	static private Icon tops[] = new Icon[3]; //top images icons
-	static private Icon mids[] = new Icon[3]; //middle images icons
-	static private Icon buts[] = new Icon[3]; //buttom images icons
+	static private Icon icons[] = new Icon[5]; //top images icons
 	static private Icon icon1; //loading image icon
 	
-	static private FormFigureMachine machine;
+	static private ClassicalMachine machine;
 	static private int clicks;
 	static private int prize;
 	
@@ -35,37 +40,41 @@ public class FormFigureFrame extends JFrame
 	static private boolean new_game;
 	static private int available_tokens;
 	
-	public FormFigureFrame(int tokens)
+	public ClassicalFrame(int tokens)
 	{   
 		//Initializing sections of frame
 		super("Form Figure Machine");
-		machine = new FormFigureMachine();
+		machine = new ClassicalMachine();
 		clicks = 0;
 		prize = 0;
 		changed_game = false;
 		available_tokens = tokens+1;
 		
+	    //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setLayout(new FlowLayout());
 		label1 = new JLabel("Available tokens: ");
 		label2 = new JLabel(machine.getInstruction());		
-		label3 = new JLabel("You won 10 tokens!!!");
+		label3 = new JLabel("You won "+prize+" tokens!!!");
+		line = new JLabel("<html><br>-------------------------------</html>");
 		field1 = new JTextField(available_tokens-1+"",10);
 		button1 = new JButton("Pull Lever");
 		button2 = new JButton("Change Machine");
-		icon1 = new ImageIcon(getClass().getResource("media/wait5.png"));
-		tops[0] = new ImageIcon(getClass().getResource("media/mushroom1.png"));
-		mids[0] = new ImageIcon(getClass().getResource("media/mushroom2.png"));
-		buts[0] = new ImageIcon(getClass().getResource("media/mushroom3.png"));
-		tops[1] = new ImageIcon(getClass().getResource("media/flower1.png"));
-		mids[1] = new ImageIcon(getClass().getResource("media/flower2.png"));
-		buts[1] = new ImageIcon(getClass().getResource("media/flower3.png"));
-		tops[2] = new ImageIcon(getClass().getResource("media/star1.png"));
-		mids[2] = new ImageIcon(getClass().getResource("media/star2.png"));
-		buts[2] = new ImageIcon(getClass().getResource("media/star3.png"));
+		icon1 = new ImageIcon(getClass().getResource("media/wait6.png"));
+		icons[0] = new ImageIcon(getClass().getResource("media/seven.png"));
+		icons[1] = new ImageIcon(getClass().getResource("media/watermelon.png"));
+		icons[2] = new ImageIcon(getClass().getResource("media/orange.png"));
+		icons[3] = new ImageIcon(getClass().getResource("media/cherry.png"));
+		icons[4] = new ImageIcon(getClass().getResource("media/grape.png"));
 		
-		top = new JLabel(icon1);
-		mid = new JLabel(icon1);
-		but = new JLabel(icon1);
+		cell0 = new JLabel(icon1);
+		cell1 = new JLabel(icon1);
+		cell2 = new JLabel(icon1);
+		cell3 = new JLabel(icon1);
+		cell4 = new JLabel(icon1);
+		cell5 = new JLabel(icon1);
+		cell6 = new JLabel(icon1);
+		cell7 = new JLabel(icon1);
+		cell8 = new JLabel(icon1);
 		
 		//configuring sections of frame
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -78,6 +87,10 @@ public class FormFigureFrame extends JFrame
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		label2.setFont(new Font("Courier", Font.ITALIC,40));
 		
+		line.setHorizontalTextPosition(SwingConstants.CENTER);
+		line.setHorizontalAlignment(SwingConstants.CENTER);
+		line.setFont(new Font("Courier", Font.ITALIC,40));
+		
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
 		label3.setFont(new Font("Courier", Font.BOLD,40));
 		label3.setVisible(false);
@@ -86,30 +99,30 @@ public class FormFigureFrame extends JFrame
 		button1.setFont(new Font("Courier", Font.PLAIN,40));
 		
 		button2.setHorizontalAlignment(SwingConstants.CENTER);
-		button2.setFont(new Font("Courier", Font.PLAIN,40));
-		
-		top.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		mid.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		but.setHorizontalAlignment(SwingConstants.CENTER);
-	
+		button2.setFont(new Font("Courier", Font.PLAIN,40));	
 		
 		//adding sections to frame
 		add(label1);
 		add(field1);
 		add(label2);
 		add(button1);
-		add(top);
-		add(mid);
-		add(but);
+		add(line);
+		add(cell0);
+		add(cell1);
+		add(cell2);
+		add(cell3);
+		add(cell4);
+		add(cell5);
+		add(cell6);
+		add(cell7);
+		add(cell8);
 		add(label3);
 		add(button2);
 		
 		addButtonAction();
 		
 	}
-	
+
 	static void addButtonAction()
 	{
 		//adding listener to button
@@ -118,30 +131,46 @@ public class FormFigureFrame extends JFrame
 	    {
 			public void actionPerformed(ActionEvent e)
 			{
-				int key = machine.getRandom(3);
+				int key0 = machine.getRandom(5);
+				int key1 = machine.getRandom(5);
+				int key2 = machine.getRandom(5);
+				
 				if(clicks==0)
 				{
 					new_game = true;
-					top.setIcon(tops[key]);
+					cell0.setIcon(icons[key0]);
+					cell3.setIcon(icons[key1]);
+					cell6.setIcon(icons[key2]);
 					clicks++;
-					machine.setKey0(key);
+					machine.setKey0(key0);
+					machine.setKey3(key1);
+					machine.setKey6(key2);
 				}
 				else if(clicks==1)
 				{
-					mid.setIcon(mids[key]);
+					cell1.setIcon(icons[key0]);
+					cell4.setIcon(icons[key1]);
+					cell7.setIcon(icons[key2]);
 					clicks++;
-					machine.setKey1(key);
+					machine.setKey1(key0);
+					machine.setKey4(key1);
+					machine.setKey7(key2);
 				}
 				else if(clicks==2)
 				{
-					but.setIcon(buts[key]);
+					cell2.setIcon(icons[key0]);
+					cell5.setIcon(icons[key1]);
+					cell8.setIcon(icons[key2]);
 					clicks++;
-					machine.setKey2(key);
+					machine.setKey2(key0);
+					machine.setKey5(key1);
+					machine.setKey8(key2);
 					
 					prize = machine.calculate();
 
 					if(prize>0)
 					{
+						label3.setText("You won "+prize+" tokens!!!");
 						label3.setVisible(true);
 					}
 					
@@ -152,9 +181,15 @@ public class FormFigureFrame extends JFrame
 				{
 					//start new machine
 					clicks = 0;
-					top.setIcon(icon1);
-					mid.setIcon(icon1);
-					but.setIcon(icon1);
+					cell0.setIcon(icon1);
+					cell1.setIcon(icon1);
+					cell2.setIcon(icon1);
+					cell3.setIcon(icon1);
+					cell4.setIcon(icon1);
+					cell5.setIcon(icon1);
+					cell6.setIcon(icon1);
+					cell7.setIcon(icon1);
+					cell8.setIcon(icon1);
 					button1.setText("Pull Lever");
 					label3.setVisible(false);
 					prize = 0;

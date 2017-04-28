@@ -16,7 +16,10 @@ public class ClassicalMachine extends SlotMachine
 	
 	public String getInstruction()
 	{
-		return "<html><br>Make a mushroom, flower,<br>or star by lining up evey<br>image.<br><br></html>";
+		return "<html><br>Make vertical, horizontal,<br>or diagonal lines of the"
+				+ "<br>same symbol.<br><br>Horizontal line: 5 tokens"
+				+ "<br>Vertical line: 5 tokens"
+				+ "<br>Diagonal line: tokens*2<br><br></html>";
 	}
 
 	public void setKey0(int i)
@@ -68,13 +71,28 @@ public class ClassicalMachine extends SlotMachine
 	{
 		int prize = 0;
 		
-		if(key[0] == key[1] && key[0] == key[2])
-		{
-			return 10;
-		}
-		else
-		{
-			return 0;
-		}
+		//checking horizontal lines
+		if(key[0][0] == key[0][1] && key[0][0] == key[0][2])
+			prize+=5;
+		if(key[1][0] == key[1][1] && key[1][0] == key[1][2])
+			prize+=5;
+		if(key[2][0] == key[2][1] && key[2][0] == key[2][2])
+			prize+=5;
+		
+		//checking vertical lines
+		if(key[0][0] == key[1][0] && key[0][0] == key[2][0])
+			prize+=5;
+		if(key[0][1] == key[1][1] && key[0][1] == key[2][1])
+			prize+=5;
+		if(key[0][2] == key[1][2] && key[0][2] == key[2][2])
+			prize+=5;
+		
+		//checking diagonal lines
+		if(key[0][0] == key[1][1] && key[0][0] == key[2][2])
+			prize*=2;
+		if(key[0][2] == key[1][1] && key[0][2] == key[2][0])
+			prize*=2;
+		
+		return prize;
 	}
 }
