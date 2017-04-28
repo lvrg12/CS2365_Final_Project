@@ -26,7 +26,7 @@ public class FormFigureFrame extends JFrame
 	static private Icon buts[] = new Icon[3]; //buttom images icons
 	static private Icon icon1; //loading image icon
 	
-	static private FormFigure machine;
+	static private FormFigureMachine machine;
 	static private int clicks;
 	static private int prize;
 	
@@ -39,7 +39,7 @@ public class FormFigureFrame extends JFrame
 	{   
 		//Initializing sections of frame
 		super("Form Figure Machine");
-		machine = new FormFigure();
+		machine = new FormFigureMachine();
 		clicks = 0;
 		prize = 0;
 		changed_game = false;

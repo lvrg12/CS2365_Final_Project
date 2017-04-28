@@ -36,53 +36,111 @@ public class SlotMachineMain
 		String wanted_game = home.getWantedGame();
 		
 		//waiting for user to choose a game
-		while(wanted_game.equals("None"))
+		while(true)
 		{
 			wanted_game = home.getWantedGame() + "";
-		}
-		
-		home.setVisible(false);
-		
-		if(wanted_game.equals("FormFigure"))
-		{
-			FormFigureFrame form_figure = new FormFigureFrame(player.getTokens());
-			form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			form_figure.setSize(750,1450);
-			form_figure.setVisible(true);
 			
-			boolean changed_game = form_figure.getChangedGame();
-			
-			//waiting to change game
-			while(!changed_game)
+			//FormFigure machine chosen
+			if(wanted_game.equals("FormFigure"))
 			{
-				boolean new_game = form_figure.getNewGame();
+				home.setVisible(false);
 				
-				//wait for new game to start or change game
-				while(!new_game && !changed_game)
-				{
-					waiter+=""; //keep looping
-					new_game = form_figure.getNewGame();
-					changed_game = form_figure.getChangedGame();
-				}
+				FormFigureFrame form_figure = new FormFigureFrame(player.getTokens());
+				form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				form_figure.setSize(750,1450);
+				form_figure.setVisible(true);
 				
-				if(new_game)
+				boolean changed_game = form_figure.getChangedGame();
+				
+				//waiting to change game
+				while(!changed_game)
 				{
-					player.subtractTokens(form_figure.getCost());
-					form_figure.setAvailableTokens(player.getTokens());
+					boolean new_game = form_figure.getNewGame();
 					
-					//waiting for game to finish
-					while(new_game)
+					//wait for new game to start or change game
+					while(!new_game && !changed_game)
 					{
 						waiter+=""; //keep looping
 						new_game = form_figure.getNewGame();
+						changed_game = form_figure.getChangedGame();
 					}
-					player.addTokens(form_figure.getPrize());
-					form_figure.resetPrize();
+					
+					if(new_game)
+					{
+						player.subtractTokens(form_figure.getCost());
+						form_figure.setAvailableTokens(player.getTokens());
+						
+						//waiting for game to finish
+						while(new_game)
+						{
+							waiter+=""; //keep looping
+							new_game = form_figure.getNewGame();
+						}
+						player.addTokens(form_figure.getPrize());
+						form_figure.resetPrize();
+					}
+					
+					waiter+=""; //keep looping
+					changed_game = form_figure.getChangedGame();
 				}
 				
-				waiter+=""; //keep looping
-				changed_game = form_figure.getChangedGame();
+				form_figure.setVisible(false);
+				form_figure.dispose();
+				home.resetWantedGame();
+				home.setAvailableTokens(player.getTokens());
+				home.setVisible(true);
 			}
+			/*
+			//Classical machine chosen
+			if(wanted_game.equals("Classical"))
+			{
+				home.setVisible(false);
+				
+				FormFigureFrame form_figure = new FormFigureFrame(player.getTokens());
+				form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				form_figure.setSize(750,1450);
+				form_figure.setVisible(true);
+				
+				boolean changed_game = form_figure.getChangedGame();
+				
+				//waiting to change game
+				while(!changed_game)
+				{
+					boolean new_game = form_figure.getNewGame();
+					
+					//wait for new game to start or change game
+					while(!new_game && !changed_game)
+					{
+						waiter+=""; //keep looping
+						new_game = form_figure.getNewGame();
+						changed_game = form_figure.getChangedGame();
+					}
+					
+					if(new_game)
+					{
+						player.subtractTokens(form_figure.getCost());
+						form_figure.setAvailableTokens(player.getTokens());
+						
+						//waiting for game to finish
+						while(new_game)
+						{
+							waiter+=""; //keep looping
+							new_game = form_figure.getNewGame();
+						}
+						player.addTokens(form_figure.getPrize());
+						form_figure.resetPrize();
+					}
+					
+					waiter+=""; //keep looping
+					changed_game = form_figure.getChangedGame();
+				}
+				
+				form_figure.setVisible(false);
+				form_figure.dispose();
+				home.resetWantedGame();
+				home.setVisible(true);
+			}
+			*/
 		}
 	}
 }

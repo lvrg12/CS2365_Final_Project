@@ -4,11 +4,11 @@
 
 package defaultPackage;
 
-public class FormFigure extends SlotMachine
+public class FormFigureMachine extends SlotMachine
 {
 	private int[] key;
 
-	public FormFigure()
+	public FormFigureMachine()
 	{
 		super(1);
 		key = new int[3];
@@ -45,5 +45,4 @@ public class FormFigure extends SlotMachine
 			return 0;
 		}
 	}
-
 }
