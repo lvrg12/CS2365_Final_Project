@@ -15,6 +15,7 @@ public class ClassicalFrame extends JFrame
 	private JLabel label1; //Available tokens label
 	private JLabel label2; //Instructions label
 	private JLabel line; //line label
+	private JLabel line2; //line2 label
 	static private JLabel label3; //You won label
 	static private JLabel cell0; //cell0 image label
 	static private JLabel cell1; //cell1 image label
@@ -40,7 +41,7 @@ public class ClassicalFrame extends JFrame
 	static private boolean new_game;
 	static private int available_tokens;
 	
-	public ClassicalFrame(int tokens)
+	public ClassicalFrame(int tokens,String size)
 	{   
 		//Initializing sections of frame
 		super("Form Figure Machine");
@@ -56,15 +57,16 @@ public class ClassicalFrame extends JFrame
 		label2 = new JLabel(machine.getInstruction());		
 		label3 = new JLabel("You won "+prize+" tokens!!!");
 		line = new JLabel("<html><br>-------------------------------</html>");
+		line2 = new JLabel("<html>-------------------------------<br></html>");
 		field1 = new JTextField(available_tokens-1+"",10);
 		button1 = new JButton("Pull Lever");
 		button2 = new JButton("Change Machine");
-		icon1 = new ImageIcon(getClass().getResource("media/wait6.png"));
-		icons[0] = new ImageIcon(getClass().getResource("media/seven.png"));
-		icons[1] = new ImageIcon(getClass().getResource("media/watermelon.png"));
-		icons[2] = new ImageIcon(getClass().getResource("media/orange.png"));
-		icons[3] = new ImageIcon(getClass().getResource("media/cherry.png"));
-		icons[4] = new ImageIcon(getClass().getResource("media/grape.png"));
+		icon1 = new ImageIcon(getClass().getResource("media/shortwait"+size+".png"));
+		icons[0] = new ImageIcon(getClass().getResource("media/seven"+size+".png"));
+		icons[1] = new ImageIcon(getClass().getResource("media/watermelon"+size+".png"));
+		icons[2] = new ImageIcon(getClass().getResource("media/orange"+size+".png"));
+		icons[3] = new ImageIcon(getClass().getResource("media/cherry"+size+".png"));
+		icons[4] = new ImageIcon(getClass().getResource("media/grape"+size+".png"));
 		
 		cell0 = new JLabel(icon1);
 		cell1 = new JLabel(icon1);
@@ -77,29 +79,35 @@ public class ClassicalFrame extends JFrame
 		cell8 = new JLabel(icon1);
 		
 		//configuring sections of frame
-		label1.setHorizontalAlignment(SwingConstants.CENTER);
-		label1.setFont(new Font("Courier", Font.BOLD,40));
+		int font_size = size.equals("small")? 15 : 40;
 		
-		field1.setFont(new Font("Courier", Font.BOLD,40));
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("Courier", Font.BOLD,font_size));
+		
+		field1.setFont(new Font("Courier", Font.BOLD,font_size));
 		field1.setEditable(false);
 		
 		label2.setHorizontalTextPosition(SwingConstants.CENTER);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
-		label2.setFont(new Font("Courier", Font.ITALIC,40));
+		label2.setFont(new Font("Courier", Font.ITALIC,font_size));
 		
 		line.setHorizontalTextPosition(SwingConstants.CENTER);
 		line.setHorizontalAlignment(SwingConstants.CENTER);
-		line.setFont(new Font("Courier", Font.ITALIC,40));
+		line.setFont(new Font("Courier", Font.ITALIC,font_size));
+		
+		line2.setHorizontalTextPosition(SwingConstants.CENTER);
+		line2.setHorizontalAlignment(SwingConstants.CENTER);
+		line2.setFont(new Font("Courier", Font.ITALIC,font_size));
 		
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
-		label3.setFont(new Font("Courier", Font.BOLD,40));
+		label3.setFont(new Font("Courier", Font.BOLD,font_size));
 		label3.setVisible(false);
 		
 		button1.setHorizontalAlignment(SwingConstants.CENTER);
-		button1.setFont(new Font("Courier", Font.PLAIN,40));
+		button1.setFont(new Font("Courier", Font.PLAIN,font_size));
 		
 		button2.setHorizontalAlignment(SwingConstants.CENTER);
-		button2.setFont(new Font("Courier", Font.PLAIN,40));	
+		button2.setFont(new Font("Courier", Font.PLAIN,font_size));	
 		
 		//adding sections to frame
 		add(label1);
@@ -116,6 +124,7 @@ public class ClassicalFrame extends JFrame
 		add(cell6);
 		add(cell7);
 		add(cell8);
+		add(line2);
 		add(label3);
 		add(button2);
 		

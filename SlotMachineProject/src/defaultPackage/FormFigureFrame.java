@@ -14,6 +14,8 @@ public class FormFigureFrame extends JFrame
 	//frame sections
 	private JLabel label1; //Available tokens label
 	private JLabel label2; //Instructions label
+	private JLabel line; //line label
+	private JLabel line2; //line2 label
 	static private JLabel label3; //You won label
 	static private JLabel top; //top image label
 	static private JLabel mid; //middle image label
@@ -35,7 +37,7 @@ public class FormFigureFrame extends JFrame
 	static private boolean new_game;
 	static private int available_tokens;
 	
-	public FormFigureFrame(int tokens)
+	public FormFigureFrame(int tokens, String size)
 	{   
 		//Initializing sections of frame
 		super("Form Figure Machine");
@@ -49,44 +51,56 @@ public class FormFigureFrame extends JFrame
 		label1 = new JLabel("Available tokens: ");
 		label2 = new JLabel(machine.getInstruction());		
 		label3 = new JLabel("You won 10 tokens!!!");
+		line = new JLabel("<html><br>-------------------------------</html>");
+		line2 = new JLabel("<html>-------------------------------<br></html>");
 		field1 = new JTextField(available_tokens-1+"",10);
 		button1 = new JButton("Pull Lever");
 		button2 = new JButton("Change Machine");
-		icon1 = new ImageIcon(getClass().getResource("media/wait5.png"));
-		tops[0] = new ImageIcon(getClass().getResource("media/mushroom1.png"));
-		mids[0] = new ImageIcon(getClass().getResource("media/mushroom2.png"));
-		buts[0] = new ImageIcon(getClass().getResource("media/mushroom3.png"));
-		tops[1] = new ImageIcon(getClass().getResource("media/flower1.png"));
-		mids[1] = new ImageIcon(getClass().getResource("media/flower2.png"));
-		buts[1] = new ImageIcon(getClass().getResource("media/flower3.png"));
-		tops[2] = new ImageIcon(getClass().getResource("media/star1.png"));
-		mids[2] = new ImageIcon(getClass().getResource("media/star2.png"));
-		buts[2] = new ImageIcon(getClass().getResource("media/star3.png"));
+		icon1 = new ImageIcon(getClass().getResource("media/longwait"+size+".png"));
+		tops[0] = new ImageIcon(getClass().getResource("media/mushroom1"+size+".png"));
+		mids[0] = new ImageIcon(getClass().getResource("media/mushroom2"+size+".png"));
+		buts[0] = new ImageIcon(getClass().getResource("media/mushroom3"+size+".png"));
+		tops[1] = new ImageIcon(getClass().getResource("media/flower1"+size+".png"));
+		mids[1] = new ImageIcon(getClass().getResource("media/flower2"+size+".png"));
+		buts[1] = new ImageIcon(getClass().getResource("media/flower3"+size+".png"));
+		tops[2] = new ImageIcon(getClass().getResource("media/star1"+size+".png"));
+		mids[2] = new ImageIcon(getClass().getResource("media/star2"+size+".png"));
+		buts[2] = new ImageIcon(getClass().getResource("media/star3"+size+".png"));
 		
 		top = new JLabel(icon1);
 		mid = new JLabel(icon1);
 		but = new JLabel(icon1);
 		
 		//configuring sections of frame
-		label1.setHorizontalAlignment(SwingConstants.CENTER);
-		label1.setFont(new Font("Courier", Font.BOLD,40));
+		int font_size = size.equals("small")? 15 : 40;
 		
-		field1.setFont(new Font("Courier", Font.BOLD,40));
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("Courier", Font.BOLD,font_size));
+		
+		field1.setFont(new Font("Courier", Font.BOLD,font_size));
 		field1.setEditable(false);
 		
 		label2.setHorizontalTextPosition(SwingConstants.CENTER);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
-		label2.setFont(new Font("Courier", Font.ITALIC,40));
+		label2.setFont(new Font("Courier", Font.ITALIC,font_size));
 		
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
-		label3.setFont(new Font("Courier", Font.BOLD,40));
+		label3.setFont(new Font("Courier", Font.BOLD,font_size));
 		label3.setVisible(false);
 		
+		line.setHorizontalTextPosition(SwingConstants.CENTER);
+		line.setHorizontalAlignment(SwingConstants.CENTER);
+		line.setFont(new Font("Courier", Font.ITALIC,font_size));
+		
+		line2.setHorizontalTextPosition(SwingConstants.CENTER);
+		line2.setHorizontalAlignment(SwingConstants.CENTER);
+		line2.setFont(new Font("Courier", Font.ITALIC,font_size));
+		
 		button1.setHorizontalAlignment(SwingConstants.CENTER);
-		button1.setFont(new Font("Courier", Font.PLAIN,40));
+		button1.setFont(new Font("Courier", Font.PLAIN,font_size));
 		
 		button2.setHorizontalAlignment(SwingConstants.CENTER);
-		button2.setFont(new Font("Courier", Font.PLAIN,40));
+		button2.setFont(new Font("Courier", Font.PLAIN,font_size));
 		
 		top.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -100,9 +114,11 @@ public class FormFigureFrame extends JFrame
 		add(field1);
 		add(label2);
 		add(button1);
+		add(line);
 		add(top);
 		add(mid);
 		add(but);
+		add(line2);
 		add(label3);
 		add(button2);
 		

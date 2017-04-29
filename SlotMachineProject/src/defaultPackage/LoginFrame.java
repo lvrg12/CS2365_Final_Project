@@ -21,29 +21,32 @@ public class LoginFrame extends JFrame
 	static private String username;
 	
 	
-	public LoginFrame()
+	public LoginFrame(String size)
 	{   		
 		//Initializing sections of frame
 		super("Login");
 		setLayout(new FlowLayout());
 		label1 = new JLabel("<html>Slot Machine Game<br><br></html>");
 		label2 = new JLabel("<html>Enter username:<br></html>");
-		field1 = new JTextField(30);
+		field1 = new JTextField(28);
 		button1 = new JButton("Log In");
 		
 		username = "";
 		
 		//configuring sections of frame
+		int big_font_size = size.equals("small")? 24 : 75;
+		int small_font_size = size.equals("small")? 15 : 40;
+		
 		label1.setHorizontalTextPosition(SwingConstants.CENTER);
-		label1.setFont(new Font("Courier", Font.BOLD,75));
+		label1.setFont(new Font("Courier", Font.BOLD,big_font_size));
 		
 		label2.setHorizontalTextPosition(SwingConstants.CENTER);
-		label2.setFont(new Font("Courier", Font.ITALIC,40));
+		label2.setFont(new Font("Courier", Font.ITALIC,small_font_size));
 		
-		field1.setFont(new Font("Courier", Font.PLAIN,40));
+		field1.setFont(new Font("Courier", Font.PLAIN,small_font_size));
 		
 		button1.setHorizontalTextPosition(SwingConstants.CENTER);
-		button1.setFont(new Font("Courier", Font.PLAIN,40));
+		button1.setFont(new Font("Courier", Font.PLAIN,small_font_size));
 		
 		//adding sections to frame
 		add(label1);

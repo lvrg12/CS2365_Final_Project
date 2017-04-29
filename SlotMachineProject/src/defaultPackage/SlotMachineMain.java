@@ -3,7 +3,6 @@
 //Date: 05/10/17
 
 package defaultPackage;
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,9 +11,27 @@ public class SlotMachineMain
 	public static void main(String[] args)
 	{
 		String waiter = "";
-		LoginFrame login = new LoginFrame();
+		String size = "small";
+		
+		int bigFrameWidth, bigFrameHeight, smallFrameWidth, smallFrameHeight;
+		if(size.equals("small"))
+		{
+			smallFrameWidth = 275;
+			smallFrameHeight = 300;
+			bigFrameWidth = 275;
+			bigFrameHeight = 730;
+		}
+		else
+		{
+			smallFrameWidth = 855;
+			smallFrameHeight = 600;
+			bigFrameWidth = 750;
+			bigFrameHeight = 1600;
+		}
+		
+		LoginFrame login = new LoginFrame(size);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		login.setSize(855,600);
+		login.setSize(smallFrameWidth,smallFrameHeight);
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		
@@ -29,9 +46,9 @@ public class SlotMachineMain
 		Player player = new Player(username,20);
 		
 		login.setVisible(false);
-		HomeFrame home = new HomeFrame(player.getUsername(),player.getTokens());
+		HomeFrame home = new HomeFrame(player.getUsername(),player.getTokens(),size);
 		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		home.setSize(855,600);
+		home.setSize(smallFrameWidth,smallFrameHeight);
 		home.setLocationRelativeTo(null);
 		home.setVisible(true);
 		
@@ -47,9 +64,9 @@ public class SlotMachineMain
 			{
 				home.setVisible(false);
 				
-				FormFigureFrame form_figure = new FormFigureFrame(player.getTokens());
+				FormFigureFrame form_figure = new FormFigureFrame(player.getTokens(),size);
 				form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				form_figure.setSize(750,1400);
+				form_figure.setSize(bigFrameWidth,bigFrameHeight);
 				form_figure.setLocationRelativeTo(null);
 				form_figure.setVisible(true);
 				
@@ -99,9 +116,9 @@ public class SlotMachineMain
 			{
 				home.setVisible(false);
 				
-				ClassicalFrame classical = new ClassicalFrame(player.getTokens());
+				ClassicalFrame classical = new ClassicalFrame(player.getTokens(),size);
 				classical.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				classical.setSize(750,1600);
+				classical.setSize(bigFrameWidth,bigFrameHeight);
 				classical.setLocationRelativeTo(null);
 				classical.setVisible(true);
 				

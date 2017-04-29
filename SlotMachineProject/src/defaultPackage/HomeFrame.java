@@ -24,7 +24,7 @@ public class HomeFrame extends JFrame
 	static private boolean figure_button_pressed;
 	static private boolean classical_button_pressed;
 	
-	public HomeFrame(String username, int tokens)
+	public HomeFrame(String username, int tokens, String size)
 	{   
 		//Initializing sections of frame
 		super("Home");
@@ -41,26 +41,29 @@ public class HomeFrame extends JFrame
 		classical_button_pressed = false;
 		
 		//configuring sections of frame
+		int big_font_size = size.equals("small")? 20 : 60;
+		int small_font_size = size.equals("small")? 15 : 40;
+		
 		label1.setHorizontalTextPosition(SwingConstants.CENTER);
-		label1.setFont(new Font("Courier", Font.BOLD,60));
+		label1.setFont(new Font("Courier", Font.BOLD,big_font_size));
 		
 		label2.setHorizontalTextPosition(SwingConstants.CENTER);
-		label2.setFont(new Font("Courier", Font.PLAIN,40));
+		label2.setFont(new Font("Courier", Font.PLAIN,small_font_size));
 		
 		label3.setHorizontalTextPosition(SwingConstants.LEFT);
-		label3.setFont(new Font("Courier", Font.ITALIC,40));
+		label3.setFont(new Font("Courier", Font.ITALIC,small_font_size));
 		
 		button1.setHorizontalTextPosition(SwingConstants.LEFT);
-		button1.setFont(new Font("Courier", Font.PLAIN,40));
+		button1.setFont(new Font("Courier", Font.PLAIN,small_font_size));
 		
 		label4.setHorizontalTextPosition(SwingConstants.LEFT);
-		label4.setFont(new Font("Courier", Font.ITALIC,40));
+		label4.setFont(new Font("Courier", Font.ITALIC,small_font_size));
 		
 		button2.setHorizontalTextPosition(SwingConstants.LEFT);
-		button2.setFont(new Font("Courier", Font.PLAIN,40));
+		button2.setFont(new Font("Courier", Font.PLAIN,small_font_size));
 		
 		label5.setHorizontalTextPosition(SwingConstants.LEFT);
-		label5.setFont(new Font("Courier", Font.ITALIC,40));
+		label5.setFont(new Font("Courier", Font.ITALIC,small_font_size));
 		
 		//adding sections to frame
 		add(label1);
