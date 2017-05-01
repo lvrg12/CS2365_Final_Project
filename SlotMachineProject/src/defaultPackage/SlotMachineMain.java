@@ -87,6 +87,10 @@ public class SlotMachineMain
 					
 					if(new_game)
 					{
+						//check here if player.getTokens()<form_figure.getCost()
+						//then break and close program
+						//else continue
+						//copy this ^ to classical machine
 						player.subtractTokens(form_figure.getCost());
 						form_figure.setAvailableTokens(player.getTokens());
 						
