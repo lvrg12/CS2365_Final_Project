@@ -4,22 +4,25 @@
 
 package defaultPackage;
 import javax.swing.*;
-import java.awt.*;
 
 public class SlotMachineMain
 {
 	public static void main(String[] args)
 	{
-		String waiter = "";
-		String size = "small";
+		String waiter = ""; //needed for while loops
+		String size = "small"; //depends on the resolution of the local machine
 		
+		//sets frame widths and heights depending on the resolution of the machine
 		int bigFrameWidth, bigFrameHeight, smallFrameWidth, smallFrameHeight;
+		int goFrameWidth, goFrameHeight;
 		if(size.equals("small"))
 		{
 			smallFrameWidth = 275;
 			smallFrameHeight = 300;
 			bigFrameWidth = 275;
 			bigFrameHeight = 730;
+			goFrameWidth = 350;
+			goFrameHeight = 175;
 		}
 		else
 		{
@@ -27,24 +30,28 @@ public class SlotMachineMain
 			smallFrameHeight = 600;
 			bigFrameWidth = 750;
 			bigFrameHeight = 1600;
+			goFrameWidth = 2000;
+			goFrameHeight = 550;
 		}
 		
+		//opening log in frame
 		LoginFrame login = new LoginFrame(size);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.setSize(smallFrameWidth,smallFrameHeight);
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		
-		String username = login.getUsername();
-		
 		//waiting for appropriate username input
+		String username = login.getUsername();
 		while(username.equals(""))
 		{
 			username = login.getUsername() + "";
 		}
 		
+		//creating new Player instance
 		Player player = new Player(username,20);
 		
+		//opening home frame
 		login.setVisible(false);
 		HomeFrame home = new HomeFrame(player.getUsername(),player.getTokens(),size);
 		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,9 +59,8 @@ public class SlotMachineMain
 		home.setLocationRelativeTo(null);
 		home.setVisible(true);
 		
-		String wanted_game = home.getWantedGame();
-		
 		//waiting for user to choose a game
+		String wanted_game = home.getWantedGame();
 		while(true)
 		{
 			wanted_game = home.getWantedGame() + "";
@@ -62,22 +68,20 @@ public class SlotMachineMain
 			//FormFigure machine chosen
 			if(wanted_game.equals("FormFigure"))
 			{
+				//opening form figure frame
 				home.setVisible(false);
-				
 				FormFigureFrame form_figure = new FormFigureFrame(player.getTokens(),size);
 				form_figure.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				form_figure.setSize(bigFrameWidth,bigFrameHeight);
 				form_figure.setLocationRelativeTo(null);
 				form_figure.setVisible(true);
 				
-				boolean changed_game = form_figure.getChangedGame();
-				
 				//waiting to change game
+				boolean changed_game = form_figure.getChangedGame();
 				while(!changed_game)
-				{
+				{					
+					//waiting for new game to start or change game
 					boolean new_game = form_figure.getNewGame();
-					
-					//wait for new game to start or change game
 					while(!new_game && !changed_game)
 					{
 						waiter+=""; //keep looping
@@ -85,12 +89,15 @@ public class SlotMachineMain
 						changed_game = form_figure.getChangedGame();
 					}
 					
+					//checking if player has enough tokens
+					if(player.getTokens()<form_figure.getCost())
+					{
+						break;
+					}
+					
+					//starting new game
 					if(new_game)
 					{
-						//check here if player.getTokens()<form_figure.getCost()
-						//then break and close program
-						//else continue
-						//copy this ^ to classical machine
 						player.subtractTokens(form_figure.getCost());
 						form_figure.setAvailableTokens(player.getTokens());
 						
@@ -108,6 +115,7 @@ public class SlotMachineMain
 					changed_game = form_figure.getChangedGame();
 				}
 				
+				//closing form figure frame and opening home frame
 				form_figure.setVisible(false);
 				form_figure.dispose();
 				home.resetWantedGame();
@@ -118,23 +126,21 @@ public class SlotMachineMain
 			//Classical machine chosen
 			if(wanted_game.equals("Classical"))
 			{
+				//opening classical frame
 				home.setVisible(false);
-				
 				ClassicalFrame classical = new ClassicalFrame(player.getTokens(),size);
 				classical.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				classical.setSize(bigFrameWidth,bigFrameHeight);
 				classical.setLocationRelativeTo(null);
 				classical.setVisible(true);
 				
-				
-				boolean changed_game = classical.getChangedGame();
-				
 				//waiting to change game
+				boolean changed_game = classical.getChangedGame();
 				while(!changed_game)
 				{
 					boolean new_game = classical.getNewGame();
 					
-					//wait for new game to start or change game
+					//waiting for new game to start or change game
 					while(!new_game && !changed_game)
 					{
 						waiter+=""; //keep looping
@@ -142,6 +148,13 @@ public class SlotMachineMain
 						changed_game = classical.getChangedGame();
 					}
 					
+					//checking if player has enough tokens
+					if(player.getTokens()<classical.getCost())
+					{
+						break;
+					}
+					
+					//starting new game
 					if(new_game)
 					{
 						player.subtractTokens(classical.getCost());
@@ -161,11 +174,24 @@ public class SlotMachineMain
 					changed_game = classical.getChangedGame();
 				}
 				
+				//closing clasical frame and opening home frame
 				classical.setVisible(false);
 				classical.dispose();
 				home.resetWantedGame();
 				home.setAvailableTokens(player.getTokens());
 				home.setVisible(true);
+			}
+			
+			//checking if player has 0 tokens
+			if(player.getTokens() == 0)
+			{
+				//opening game over frame
+				GameOverFrame game_over = new GameOverFrame(size);
+				game_over.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				game_over.setSize(goFrameWidth,goFrameHeight);
+				game_over.setLocationRelativeTo(null);
+				game_over.setVisible(true);
+				break;
 			}
 		}
 	}
