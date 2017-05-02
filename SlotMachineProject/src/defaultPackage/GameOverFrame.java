@@ -9,7 +9,7 @@ import javax.swing.*;
 public class GameOverFrame extends JFrame
 {
 	//frame sections
-	private JLabel label1; //game over label	
+	private JLabel label1; //game over label
 	
 	public GameOverFrame(String size)
 	{   		

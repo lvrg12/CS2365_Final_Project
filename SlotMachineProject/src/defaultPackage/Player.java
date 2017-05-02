@@ -37,6 +37,5 @@ public class Player
 	public void subtractTokens(int x)
 	{
 		tokens = tokens - x;
-		//should return error if tokens<0
 	}
 }
